@@ -4,4 +4,8 @@ export default defineConfig({
   server: {
     open: true,
   },
+  test: {
+    // Vitest configuration
+    globals: false,
+  },
 });
