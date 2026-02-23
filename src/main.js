@@ -1,13 +1,14 @@
 /**
  * Application entry point.
  *
- * Imports the canvas renderer and runs a basic render loop that clears the
- * screen each frame.  This serves as verification that the canvas module is
- * wired up correctly: you should see a solid black fullscreen canvas with no
- * scrollbars that stays crisp on retina displays and resizes smoothly.
+ * Imports the canvas renderer and the engine game loop, then starts the loop
+ * with stub update/render callbacks.  This serves as verification that the
+ * game-loop module is wired up correctly: you should see a solid black
+ * fullscreen canvas with no scrollbars that stays crisp and resizes smoothly.
  */
 
-import { canvas, ctx, getWidth, getHeight, clear } from './canvas.js';
+import { canvas, getWidth, getHeight } from './canvas.js';
+import { startLoop, setDebug } from './engine/game-loop.js';
 
 // Log initial state so DPI scaling can be verified in the console
 console.log(
@@ -15,16 +16,29 @@ console.log(
     `buffer: ${canvas.width}×${canvas.height}`,
 );
 
+// Enable the FPS debug overlay during development
+setDebug(true);
+
 // ---------------------------------------------------------------------------
-// Render loop
+// Game loop
 // ---------------------------------------------------------------------------
 
-function frame() {
-  clear();
-
-  // Future game rendering will go here.
-
-  requestAnimationFrame(frame);
+/**
+ * Physics / game-state update (called at a fixed 1/60 s timestep).
+ *
+ * @param {number} _dt  Fixed delta time in seconds.
+ */
+function update(_dt) {
+  // Future game logic will go here.
 }
 
-requestAnimationFrame(frame);
+/**
+ * Render the current game state (called once per frame).
+ *
+ * @param {CanvasRenderingContext2D} _ctx  Canvas 2D rendering context.
+ */
+function render(_ctx) {
+  // Future game rendering will go here.
+}
+
+startLoop(update, render);
